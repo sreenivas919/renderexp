@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #72EDF2, #5151E5);
+            color: white;
+            text-align: center;
+            padding-top: 50px;
+        }
+        .container {
+            max-width: 500px;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
+        }
+        input, button {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="mb-3">Weather App</h1>
+        <form method="POST">
+            <div class="input-group">
+                <input type="text" name="city" class="form-control" placeholder="Enter city name" required>
+                <button type="submit" class="btn btn-primary">Get Weather</button>
+            </div>
+        </form>
+
+        {% if error %}
+            <div class="alert alert-danger mt-3">{{ error }}</div>
+        {% elif weather %}
+            <div class="mt-4">
+                <h2>{{ weather.name }}, {{ weather.sys.country }}</h2>
+                <h4>{{ weather.weather[0].description | title }}</h4>
+                <p><strong>Temperature:</strong> {{ weather.main.temp }}°C</p>
+                <p><strong>Humidity:</strong> {{ weather.main.humidity }}%</p>
+                <p><strong>Wind Speed:</strong> {{ weather.wind.speed }} m/s</p>
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
